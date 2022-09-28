@@ -1,3 +1,5 @@
+from pprint import pprint
+
 print('Задание №1')
 
 documents = [
@@ -14,17 +16,15 @@ directories = {
 
 
 # Получение списка документов
-def list_of_doc(documents):
+def list_of_doc(documents: dict) -> list:
     list_doc = []
     for item in documents:
         list_doc.append(item['number'])
     return list_doc
-
-
 # Вывод сообщения об ошибке
 
 def ended():
-    print("Введено неверное значение, повторите попытку! \n")
+    return "Введено неверное значение, повторите попытку! \n"
 
 
 def people(documents):
@@ -53,14 +53,14 @@ def shelf(directories):
         ended()
 
 
-def list(documents):
+def list(documents: dict) -> list:
+    list_documents = []
     for elements in documents:
-        print(f"{elements['type']} {elements['number']} {elements['name']}", end=('; '))
-    print()
-    print()
+        list_documents.append(f"{elements['type']} {elements['number']} {elements['name']}")
+    return list_documents
 
 
-def add(documents, directories):
+def add(documents: dict, directories: dict):
     new_dict = {}
     num_doc = input('Введите номер документа: ')
     new_dict['type'] = input('Введите тип: ')
@@ -81,9 +81,9 @@ def add(documents, directories):
         print('Введён неверный номер полки')
 
 
-def delete(documents, directories):
+def delete(documents: dict, directories: dict):
     print("Cписок существующих документов: ")
-    print(list_of_doc(documents))
+    pprint(documents)
     num_d = input(f'Введите номер документа: ')
     if num_d in list_of_doc(documents):
         for element in documents:
@@ -92,8 +92,7 @@ def delete(documents, directories):
         for keys, elements in directories.items():
             if num_d in elements:
                 elements.remove(num_d)
-        print(f'Документ был удалено из списка: \n {documents}')
-        print(f'Документ был удален с списка: \n {directories}')
+        return 'Документ был успешно удален'
     else:
         print('Данного документа не существует, проверьте данные!')
 
@@ -136,18 +135,20 @@ def add_shelf(directories):
 
 
 while True:
-    command = input(
-        "Введите команду для выбора действия: \n q - Выход \n p - показать владельца по немеру документа \n s - показать на какой полке лежит документ \n l - вывести список документов \n a - добавить новый документ \n d - удалить документ по номеру \n m - переместить документ с полки на полку \n as - добавить новую полку \n Введите команду: ")
+    command = input("Введите команду для выбора действия: \n q - Выход \n p - показать владельца по немеру документа "
+                    "\n s - показать на какой полке лежит документ \n l - вывести список документов \n a - добавить "
+                    "новый документ \n d - удалить документ по номеру \n m - переместить документ с полки на полку \n "
+                    "as - добавить новую полку \n Введите команду: ")
     if command == 'p':
         people(documents)
     if command == 's':
         shelf(directories)
     if command == 'l':
-        list(documents)
+        pprint(documents)
     if command == 'a':
         add(documents, directories)
     if command == 'd':
-        delete(documents, directories)
+        pprint(delete(documents, directories))
     if command == 'm':
         move(directories)
     if command == 'as':
