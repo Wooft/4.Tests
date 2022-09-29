@@ -14,20 +14,14 @@ directories = {
     '3': []
 }
 
-
 # Получение списка документов
 def list_of_doc(documents: dict) -> list:
     list_doc = []
     for item in documents:
         list_doc.append(item['number'])
     return list_doc
-# Вывод сообщения об ошибке
 
-def ended():
-    return "Введено неверное значение, повторите попытку! \n"
-
-
-def people(documents):
+def people(documents: dict) -> str:
     list_of_doc(documents)
     print("Cписок существующих документов: ")
     print(list_of_doc(documents))
@@ -36,22 +30,23 @@ def people(documents):
     if inname in list_of_doc(documents):
         for element in documents:
             if element['number'] == inname:
-                print(f"{element['name']} \n")
+                return (f"{element['name']} \n")
     else:
-        ended()
+        return "Введено неверное значение, повторите попытку!"
 
-
-def shelf(directories):
+def shelf(directories: dict) -> int:
     print("Cписок существующих документов: ")
     print(list_of_doc(documents))
-    num = input('Введите номер документа: ')
-    if num in list_of_doc(documents):
-        for key, item in directories.items():
-            if num in item:
-                print(f'Документ лежит на полке № {key} \n')
-    else:
-        ended()
-
+    while True:
+        try:
+            num = input('Введите номер документа:')
+            if num in list_of_doc(documents):
+                for key, item in directories.items():
+                    if num in item:
+                        return key
+                break
+        except Exception as e:
+            print('Данные введены неверно, попробуйте снова!')
 
 def list(documents: dict) -> list:
     list_documents = []
@@ -59,8 +54,7 @@ def list(documents: dict) -> list:
         list_documents.append(f"{elements['type']} {elements['number']} {elements['name']}")
     return list_documents
 
-
-def add(documents: dict, directories: dict):
+def add(documents: dict, directories: dict) -> dict:
     new_dict = {}
     num_doc = input('Введите номер документа: ')
     new_dict['type'] = input('Введите тип: ')
@@ -71,15 +65,16 @@ def add(documents: dict, directories: dict):
     print("Данные добавлены в список: ")
     print(list(documents))
 
-    new = input('Введите номер полки: ')
-    if new in directories.keys():
-        for keys, values in directories.items():
-            if keys == new:
-                values.append(num_doc)
-        print(f"Документ добавлен на полку: \n {directories}")
-    else:
-        print('Введён неверный номер полки')
-
+    while True:
+        try:
+            new = input('Введите номер полки: ')
+            if new in directories.keys():
+                for keys, values in directories.items():
+                    if keys == new:
+                        values.append(num_doc)
+                return directories
+        except Exception as e:
+            print('Данные введены неверно, попробуйте снова!')
 
 def delete(documents: dict, directories: dict):
     print("Cписок существующих документов: ")
@@ -116,9 +111,9 @@ def move(directories):
                     else:
                         print('Документ уже лежит на полке')
         else:
-            ended()
+            pass
     else:
-        ended()
+        pass
     print(directories)
 
 
@@ -131,7 +126,7 @@ def add_shelf(directories):
             directories.setdefault(num_p, [])
             print(directories)
     else:
-        ended()
+        pass
 
 
 while True:
@@ -140,13 +135,13 @@ while True:
                     "новый документ \n d - удалить документ по номеру \n m - переместить документ с полки на полку \n "
                     "as - добавить новую полку \n Введите команду: ")
     if command == 'p':
-        people(documents)
+        pprint(people(documents))
     if command == 's':
-        shelf(directories)
+        pprint(f'Документ лежит на полке № {shelf(directories)}')
     if command == 'l':
         pprint(documents)
     if command == 'a':
-        add(documents, directories)
+        pprint(f"Документ добавлен на полку: \n {add(documents, directories)}")
     if command == 'd':
         pprint(delete(documents, directories))
     if command == 'm':
@@ -156,4 +151,3 @@ while True:
     if command == 'q':
         print('Завершение работы')
         break
-
