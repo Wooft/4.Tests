@@ -142,12 +142,12 @@ while True:
         pprint(documents)
     if command == 'a':
         pprint(f"Документ добавлен на полку: \n {add(documents, directories)}")
-    if command == 'd':
-        pprint(delete(documents, directories))
-    if command == 'm':
-        move(directories)
-    if command == 'as':
-        add_shelf(directories)
+    # if command == 'd':
+    #     pprint(delete(documents, directories))
+    # if command == 'm':
+    #     move(directories)
+    # if command == 'as':
+    #     add_shelf(directories)
     if command == 'q':
         print('Завершение работы')
         break
