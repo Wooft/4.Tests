@@ -76,57 +76,57 @@ def add(documents: dict, directories: dict) -> dict:
         except Exception as e:
             print('Данные введены неверно, попробуйте снова!')
 
-def delete(documents: dict, directories: dict):
-    print("Cписок существующих документов: ")
-    pprint(documents)
-    num_d = input(f'Введите номер документа: ')
-    if num_d in list_of_doc(documents):
-        for element in documents:
-            if element['number'] == num_d:
-                documents.remove(element)
-        for keys, elements in directories.items():
-            if num_d in elements:
-                elements.remove(num_d)
-        return 'Документ был успешно удален'
-    else:
-        print('Данного документа не существует, проверьте данные!')
-
-
-def move(directories):
-    print("Cписок существующих документов: ")
-    print(list_of_doc(documents))
-    num_d = input('Введите номер документа: ')
-    num_p = input('Введите номер полки: ')
-    list_of_shelf = []
-    list_of_shelf.append(directories.keys())
-    if num_d in list_of_doc(documents):
-        if num_p in directories.keys():
-            for keys, values in directories.items():
-                if num_d in values:
-                    values.remove(num_d)
-            for keys, values in directories.items():
-                if keys == num_p:
-                    if values.count(num_d) == 0:
-                        values.append(num_d)
-                    else:
-                        print('Документ уже лежит на полке')
-        else:
-            pass
-    else:
-        pass
-    print(directories)
-
-
-def add_shelf(directories):
-    num_p = input('Введите номер новой полки (необходимо ввести число): ')
-    if num_p.isnumeric() == True:
-        if num_p in directories.keys():
-            print('Полка уже существует! \n')
-        else:
-            directories.setdefault(num_p, [])
-            print(directories)
-    else:
-        pass
+# def delete(documents: dict, directories: dict):
+#     print("Cписок существующих документов: ")
+#     pprint(documents)
+#     num_d = input(f'Введите номер документа: ')
+#     if num_d in list_of_doc(documents):
+#         for element in documents:
+#             if element['number'] == num_d:
+#                 documents.remove(element)
+#         for keys, elements in directories.items():
+#             if num_d in elements:
+#                 elements.remove(num_d)
+#         return 'Документ был успешно удален'
+#     else:
+#         print('Данного документа не существует, проверьте данные!')
+#
+#
+# def move(directories):
+#     print("Cписок существующих документов: ")
+#     print(list_of_doc(documents))
+#     num_d = input('Введите номер документа: ')
+#     num_p = input('Введите номер полки: ')
+#     list_of_shelf = []
+#     list_of_shelf.append(directories.keys())
+#     if num_d in list_of_doc(documents):
+#         if num_p in directories.keys():
+#             for keys, values in directories.items():
+#                 if num_d in values:
+#                     values.remove(num_d)
+#             for keys, values in directories.items():
+#                 if keys == num_p:
+#                     if values.count(num_d) == 0:
+#                         values.append(num_d)
+#                     else:
+#                         print('Документ уже лежит на полке')
+#         else:
+#             pass
+#     else:
+#         pass
+#     print(directories)
+#
+#
+# def add_shelf(directories):
+#     num_p = input('Введите номер новой полки (необходимо ввести число): ')
+#     if num_p.isnumeric() == True:
+#         if num_p in directories.keys():
+#             print('Полка уже существует! \n')
+#         else:
+#             directories.setdefault(num_p, [])
+#             print(directories)
+#     else:
+#         pass
 
 
 while True:
