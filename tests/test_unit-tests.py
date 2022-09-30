@@ -22,11 +22,6 @@ def get_input(text):
 
 class Test(unittest.TestCase):
 
-    # get_input will return 'yes' during this test
-    @patch('main.get_input', return_value='yes')
-    def test_answer_yes(self, input):
-        self.assertEqual(main.answer(), 'you entered yes')
-
-    @patch('main.get_input', return_value='no')
-    def test_answer_no(self, input):
-        self.assertEqual(main.answer(), 'you entered no')
+    @patch('builtins.input', return_value='yes')
+    def test_answer_yes(self, mock_input):
+        self.assertEqual('you entered yes')
