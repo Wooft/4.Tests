@@ -1,6 +1,4 @@
 import requests
-from pprint import pprint
-
 
 class YandexDisk:
 
