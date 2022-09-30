@@ -182,7 +182,18 @@ def answer():
     if ans == 'yes':
         return 'you entered yes'
     if ans == 'no':
-        return 'you entered no'
+        return 'жопонька'
+
+def sum():
+    """Asks for 5 space separated integers.
+    Returns the sum of these integers.
+    """
+    L = input("Type 5 integers separated by space: ")
+    L = L.split(' ')
+    result = 0
+    for num in L:
+        result += int(num)
+    return result
 
 
 
