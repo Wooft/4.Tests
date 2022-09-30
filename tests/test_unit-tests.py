@@ -11,6 +11,8 @@ class Test(unittest.TestCase):
         result_3 = get_doc_owner_name()
         self.assertTrue(result_1 == 'Василий Гупкин' and result_2 == 'Геннадий Покемонов' and result_3 == 'Аристарх Павлов')
 
+
+
     # @patch('builtins.input', side_effect=['First', 'Second', 'Third'])
     # def test_using_side_effect(self, mock_input):
     #     calling_1 = mock_input()

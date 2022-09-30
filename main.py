@@ -173,29 +173,6 @@ def secretary_program_start():
         elif user_command == 'q':
             break
 
-def get_input(text):
-    return input(text)
-
-
-def answer():
-    ans = input('enter yes or no: ')
-    if ans == 'yes':
-        return 'you entered yes'
-    if ans == 'no':
-        return 'жопонька'
-
-def sum():
-    """Asks for 5 space separated integers.
-    Returns the sum of these integers.
-    """
-    L = input("Type 5 integers separated by space: ")
-    L = L.split(' ')
-    result = 0
-    for num in L:
-        result += int(num)
-    return result
-
-
 
 if __name__ == '__main__':
     secretary_program_start()
