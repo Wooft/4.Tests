@@ -3,7 +3,6 @@ import os
 import pathlib
 
 import requests
-token = 'AQAAAAAFC3KFAADLW3RpNV5khk3NkfJZ2ZzJ80w'
 
 class YandexDisk:
 
