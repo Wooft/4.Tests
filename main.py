@@ -1,6 +1,6 @@
 from pprint import pprint
 from ya_di import YandexDisk
-token = 'AQAAAAAFC3KFAADLW3RpNV5khk3NkfJZ2ZzJ80w'
+
 documents = [
     {"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
     {"type": "invoice", "number": "11-2", "name": "Геннадий Покемонов"},
@@ -13,7 +13,6 @@ directories = {
     '3': []
 }
 
-
 def check_document_existance(user_doc_number):
     doc_founded = False
     for current_document in documents:
@@ -22,7 +21,6 @@ def check_document_existance(user_doc_number):
             doc_founded = True
             break
     return doc_founded
-
 
 def get_doc_owner_name():
     user_doc_number = input('Введите номер документа - ')
@@ -51,6 +49,7 @@ def remove_doc_from_shelf(doc_number):
         if doc_number in directory_docs_list:
             directory_docs_list.remove(doc_number)
             break
+    return
 
 
 def add_new_shelf(shelf_number=''):
@@ -100,13 +99,15 @@ def show_document_info(document):
     doc_type = document['type']
     doc_number = document['number']
     doc_owner_name = document['name']
-    print('{} "{}" "{}"'.format(doc_type, doc_number, doc_owner_name))
+    return ('{} "{}" "{}"'.format(doc_type, doc_number, doc_owner_name))
 
 
 def show_all_docs_info():
     print('Список всех документов:\n')
+    list_docs = []
     for current_document in documents:
-        show_document_info(current_document)
+        list_docs.append(show_document_info(current_document))
+    return list_docs
 
 
 def add_new_doc():
@@ -126,15 +127,15 @@ def add_new_doc():
 
 def secretary_program_start():
     """
-    ap - (all people) - команда, которая выводит список всех владельцев документов
-    p – (people) – команда, которая спросит номер документа и выведет имя человека, которому он принадлежит;
-    l – (list) – команда, которая выведет список всех документов в формате passport "2207 876234" "Василий Гупкин";
-    s – (shelf) – команда, которая спросит номер документа и выведет номер полки, на которой он находится;
+    ap - (all people) - команда, которая выводит список всех владельцев документов  - сделано
+    p – (people) – команда, которая спросит номер документа и выведет имя человека, которому он принадлежит; - сделано
+    l – (list) – команда, которая выведет список всех документов в формате passport "2207 876234" "Василий Гупкин"; - сделано
+    s – (shelf) – команда, которая спросит номер документа и выведет номер полки, на которой он находится; - сделано
     a – (add) – команда, которая добавит новый документ в каталог и в перечень полок, спросив его номер, тип,
-    имя владельца и номер полки, на котором он будет храниться.
-    d – (delete) – команда, которая спросит номер документа и удалит его из каталога и из перечня полок;
+    имя владельца и номер полки, на котором он будет храниться. - сделано
+    d – (delete) – команда, которая спросит номер документа и удалит его из каталога и из перечня полок; - сделано
     m – (move) – команда, которая спросит номер документа и целевую полку и переместит его с текущей полки на целевую;
-    as – (add shelf) – команда, которая спросит номер новой полки и добавит ее в перечень;
+    as – (add shelf) – команда, которая спросит номер новой полки и добавит ее в перечень; - сделано
     q - (quit) - команда, которая завершает выполнение программы
     """
     print(
@@ -150,7 +151,7 @@ def secretary_program_start():
             uniq_users = get_all_doc_owners_names()
             print('Список владельцев документов - {}'.format(uniq_users))
         elif user_command == 'l':
-            show_all_docs_info()
+            pprint(show_all_docs_info())
         elif user_command == 's':
             directory_number = get_doc_shelf()
             print('Документ находится на полке номер {}'.format(directory_number))
@@ -173,10 +174,6 @@ def secretary_program_start():
         elif user_command == 'q':
             break
 
-
 if __name__ == '__main__':
     secretary_program_start()
 
-# Yandex = YandexDisk(token=token)
-# folder_name = 'Новая папка'
-# Yandex.create_folder(folder_name=folder_name)

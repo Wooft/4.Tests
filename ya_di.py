@@ -1,4 +1,9 @@
+import json
+import os
+import pathlib
+
 import requests
+token = 'AQAAAAAFC3KFAADLW3RpNV5khk3NkfJZ2ZzJ80w'
 
 class YandexDisk:
 
@@ -16,8 +21,35 @@ class YandexDisk:
         params = {'path': folder_name}
         headers = self.get_headers()
         response = requests.put(url, headers=headers, params=params)
-        print(response.status_code)
-        return response.json()
+        return response.status_code
 
-    def get_folders(self):
-        pass
+    def delete_folder(self, folder_n):
+        url = f'https://cloud-api.yandex.net/v1/disk/resources'
+        params = {'path': folder_n, 'permanently': True}
+        headers = self.get_headers()
+        response = requests.delete(url, headers=headers, params=params)
+        return  response.status_code
+
+def get_path():
+    path = pathlib.Path.cwd()
+    return path
+
+def get_token():
+    os.chdir(get_path())
+    with open('tokens.json', 'r') as file:
+        data = json.load(file)
+        token = data['yandex.drive']
+    return token
+def create_folder(folder_name):
+    Yandex = YandexDisk(token=get_token())
+    answer = Yandex.create_folder(folder_name=folder_name)
+    return answer
+
+def delete_folder(folder_name):
+    Yandex = YandexDisk(token=get_token())
+    answer = Yandex.delete_folder(folder_n=folder_name)
+    return answer
+
+if __name__ == '__main__':
+    print(create_folder('Новая папка'))
+    print(delete_folder('Новая папка'))
